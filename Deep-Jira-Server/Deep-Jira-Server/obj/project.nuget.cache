@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "prOBMuM5kmTto3oXI+fkPYHccApSllVdqgy5aeLja8LW9AcuPAFzWBv/oc0/dHe68zMwnppR+gwr3JvoFWUsmA==",
+  "dgSpecHash": "JOAcum4R5ZQdM8X35NB/93yKnLCfcUkvY95La9Dxjj80X/WkgmpUr23G8uLkdYErB2ZzVjBogW7dV39hzkB7KQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\bashx\\source\\repos\\Deep-Jira\\Deep-Jira-Server\\Deep-Jira-Server\\Deep-Jira-Server.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\bashx\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

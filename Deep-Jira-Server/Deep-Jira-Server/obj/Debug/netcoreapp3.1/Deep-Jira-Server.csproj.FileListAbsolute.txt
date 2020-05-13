@@ -4,10 +4,11 @@ C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\bin\Debu
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\bin\Debug\netcoreapp3.1\Deep-Jira-Server.runtimeconfig.dev.json
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\bin\Debug\netcoreapp3.1\Deep-Jira-Server.dll
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\bin\Debug\netcoreapp3.1\Deep-Jira-Server.pdb
-C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csprojAssemblyReference.cache
-C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csproj.CoreCompileInputs.cache
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.AssemblyInfoInputs.cache
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.AssemblyInfo.cs
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.dll
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.pdb
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.genruntimeconfig.cache
+C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csproj.CoreCompileInputs.cache
+C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csproj.CopyComplete
