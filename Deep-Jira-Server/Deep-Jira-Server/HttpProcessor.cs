@@ -93,61 +93,23 @@ namespace Deep_Jira_Server
                 Content = content
             };
         }
-        public void WriteResponse(Stream output)
+        public void GetRequest()
         {
-            string responseString = "<HTML><Body> Hello world!</Body></HTML>";
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-
-            output.Write(buffer, 0, buffer.Length);
-        }
-        public void WriteRequest()
-        {
-            string url = "https://team-percy.atlassian.net/rest/servicedeskapi/auth/issue/LIS-2";
-            //string url = "https://appme-d.miele.com/operations/rest/auth/1/session";
+            string url = "http://team-percy.atlassian.net/rest/servicedeskapi/info";
 
             WebRequest wr = WebRequest.Create(url);
 
-            //NetworkCredential nc = new NetworkCredential("dewuenp", "h-!u232xl?ey");
-            //wr.Credentials = nc;
+            NetworkCredential nc = new NetworkCredential("percy.wuensch@gmx.de", "g7LKzdmjXetO76N8AZcb8982");
+            wr.Credentials = nc;
 
             wr.ContentType = "application/json";
-            wr.Method = "POST";
-            string json = "{ \"username\": \"dewuenp\", \"password\": \"h-!u232xl?ey\" } ";
-            byte[] content = Encoding.UTF8.GetBytes(json);
-            wr.ContentLength = content.Length;
-            Stream dataStream = wr.GetRequestStream();
-            dataStream.Write(content, 0, content.Length);
-            dataStream.Close();
+            wr.Method = "GET";
             WebResponse response = wr.GetResponse();
-            dynamic jsonObject = JsonConvert.DeserializeObject(StreamReader.ReadString(response));
-
-            Uri target = new Uri("https://appme-d.miele.com/operations/rest/api/2/issue/" + 12 + "/comment");
-            HttpWebRequest hwr = (HttpWebRequest)WebRequest.Create(target);
-            hwr.CookieContainer = new CookieContainer();
-            hwr.CookieContainer.Add(new Cookie((string)jsonObject.session.name, (string)jsonObject.session.value) { Domain = target.Host });
-            hwr.Method = "POST";
-            hwr.ContentType = "application/json";
-
-            //DBManager dbm = new DBManager();
-            //dbm.write("INSERT INTO license (key, created_at, expires_at, licensee, tool, expired) VALUES" +
-            //    " (" + licenseKey + ", "+ DateTime.Now.ToString() + "," + "01.01.2021" + ", " + user + ", " + tool + "," + 0.ToString() + ")");
-
-            json = " ";
-            content = Encoding.UTF8.GetBytes(json);
-            hwr.ContentLength = content.Length;
-            dataStream = hwr.GetRequestStream();
-            dataStream.Write(content, 0, content.Length);
-            dataStream.Close();
-            response = hwr.GetResponse();
             Console.WriteLine(StreamReader.ReadString(response));
-            //JiraIssue issue = new JiraIssue("Low");
-            //string json = JsonSerializer.Serialize(issue);
-            //byte[] content = Encoding.ASCII.GetBytes(json);
-            //request.ContentLength = content.Length;
-            //request.ContentType = "application/json";
-            //Stream dataStream = request.GetRequestStream();
-            //dataStream.Write(content, 0, content.Length);
-            //dataStream.Close();
+        }
+        public void GetResponse()
+        {
+            
         }
     }
 }

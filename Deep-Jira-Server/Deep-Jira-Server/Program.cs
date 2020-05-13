@@ -14,7 +14,6 @@ namespace Deep_Jira_Server
             t.Start();
 
             Console.WriteLine("Server Started");
-            
         }
     }
 }

@@ -46,18 +46,9 @@ namespace Deep_Jira_Server
 
             try
             {
-                byte[] bytes = new byte[1024];
                 Stream stream = client.GetStream();
                 HttpProcessor httpProcessor = new HttpProcessor();
                 HttpRequest request = httpProcessor.GetRequest(stream);
-                Console.WriteLine(request.Method);
-                //httpProcessor.WriteRequest();
-                //HttpRequest request = HttpRequest();
-                //dynamic req = JsonConvert.DeserializeObject(Encoding.UTF8.GetString(bytes));//<object>(Encoding.UTF8.GetString(bytes),settings);
-                //Console.WriteLine(request.ToString());
-                //Console.WriteLine("sended request");
-                //client.Close();
-                //httpProcessor.WriteRequest((string)req.issue.key, (string)req.user.key, (string)req.issue.fields.customfield_10404[0]);
             }
             catch (Exception e)
             {

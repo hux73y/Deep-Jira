@@ -10,5 +10,6 @@ C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debu
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.pdb
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.genruntimeconfig.cache
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csproj.CoreCompileInputs.cache
 C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csproj.CopyComplete
+C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csprojAssemblyReference.cache
+C:\Users\bashx\source\repos\Deep-Jira\Deep-Jira-Server\Deep-Jira-Server\obj\Debug\netcoreapp3.1\Deep-Jira-Server.csproj.CoreCompileInputs.cache
