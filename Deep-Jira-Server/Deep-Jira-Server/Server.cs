@@ -49,7 +49,7 @@ namespace Deep_Jira_Server
                 Stream stream = client.GetStream();
                 HttpProcessor httpProcessor = new HttpProcessor();
                 HttpRequest request = httpProcessor.GetRequest(stream);
-                httpProcessor.Response(request.Content);
+                httpProcessor.TranslationResponse(request.Url,request.Content);
                 client.Close();
                
             }
