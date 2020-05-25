@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Text;
@@ -12,10 +13,9 @@ namespace Deep_Jira_Server
 {
     class HttpProcessor
     {
-        public List<TicketInfo> Tickets { get; set; }
         public HttpProcessor()
         {
-            Tickets = new List<TicketInfo>();
+            
         }
         private string ReadLine(Stream stream)
         {
@@ -96,90 +96,28 @@ namespace Deep_Jira_Server
                 Content = content
             };
         }
-        public void Request()
+        public void SendResponse(Stream stream)
         {
-            Uri url = new Uri("https://team-percy.atlassian.net/rest/servicedeskapi/request");
-            WebRequest myWebRequest = WebRequest.Create(url);
-            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("percy.wuensch@gmx.de:g7LKzdmjXetO76N8AZcb8982"));
-            myWebRequest.Headers.Add("Authorization", "Basic " + encoded);
-            myWebRequest.ContentType = "application/json";
-            myWebRequest.Method = "GET";
-            myWebRequest.PreAuthenticate = true;
-            WebResponse myWebResponse = myWebRequest.GetResponse();
-            Console.WriteLine(StreamReader.ReadString(myWebResponse));
-        }
-        public void ResponseCreate(string content)
-        {
-            //Convert content to Json Object
-            Console.WriteLine(JToken.Parse(content).ToString(Formatting.Indented));
-            dynamic jsonObject = JsonConvert.DeserializeObject(content);
-            
-            //Get tranlation from deepl here and store info
-            Tickets.Add(new TicketInfo((string)jsonObject.issue.key, "English", (string)jsonObject.issue.fields.reporter.displayName, (string)jsonObject.issue.fields.reporter.accountId));
-            
-            //Create Request to Jira API for editing the description of an issue
-            string url = "https://team-percy.atlassian.net/rest/api/2/issue/" + (string)jsonObject.issue.key;
-            WebRequest wr = WebRequest.Create(url);
-            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("percy.wuensch@gmx.de:g7LKzdmjXetO76N8AZcb8982"));
-            wr.Headers.Add("Authorization", "Basic " + encoded);
-            wr.ContentType = "application/json";
-            wr.Method = "PUT";
-            string json = "{\"fields\": {\"description\": \"die neue beschreibung\"} }";
-            byte[] responseContent = Encoding.UTF8.GetBytes(json);
-            wr.ContentLength = responseContent.Length;
-            Stream dataStream = wr.GetRequestStream();
-            dataStream.Write(responseContent, 0, responseContent.Length);
-            dataStream.Close();
-            WebResponse response = wr.GetResponse();
-            Console.WriteLine(response.ToString());
-        }
-        private void ResponseAsigneeComment(string content)
-        {
-            dynamic jsonObject = JsonConvert.DeserializeObject(content);
-            Console.WriteLine(JToken.Parse(content).ToString(Formatting.Indented));
+            HttpResponse response = new HttpResponse()
+            {
+                ReasonPhrase = "OK",
+                StatusCode = "200",
+                Content = new byte[] { }
+            };
+            response.Headers["Content-Length"] = response.Content.Length.ToString();
+            response.Headers["Content-Type"] = "text/html";
 
-            string url = "https://team-percy.atlassian.net/rest/api/2/issue/" + (string)jsonObject.issue.key + "/comment/" + (string)jsonObject.comment.id;
-            WebRequest wr = WebRequest.Create(url);
-            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("percy.wuensch@gmx.de:g7LKzdmjXetO76N8AZcb8982"));
-            wr.Headers.Add("Authorization", "Basic " + encoded);
-            wr.ContentType = "application/json";
-            wr.Method = "PUT";
-            //get deepl translation here
-            string json = "{\"body\": \"I have a question to your Problem\" }";
-            byte[] responseContent = Encoding.UTF8.GetBytes(json);
-            wr.ContentLength = responseContent.Length;
-            Stream dataStream = wr.GetRequestStream();
-            dataStream.Write(responseContent, 0, responseContent.Length);
-            dataStream.Close();
-            WebResponse response = wr.GetResponse();
-            Console.WriteLine(response.ToString());
-        }
-        private void ResponseCustomerComment(string content)
-        {
-            dynamic jsonObject = JsonConvert.DeserializeObject(content);
-            Console.WriteLine(JToken.Parse(content).ToString(Formatting.Indented));
+            Write(stream, string.Format("HTTP/1.0 {0} {1}\r\n", response.StatusCode, response.ReasonPhrase));
+            Write(stream, string.Join("\r\n", response.Headers.Select(x => string.Format("{0}: {1}", x.Key, x.Value))));
+            Write(stream, "\r\n\r\n");
 
-            string url = "https://team-percy.atlassian.net/rest/api/2/issue/" + (string)jsonObject.issue.key + "/comment/" + (string)jsonObject.comment.id;
-            WebRequest wr = WebRequest.Create(url);
-            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("percy.wuensch@gmx.de:g7LKzdmjXetO76N8AZcb8982"));
-            wr.Headers.Add("Authorization", "Basic " + encoded);
-            wr.ContentType = "application/json";
-            wr.Method = "PUT";
-            string json = "{\"body\": \"I have a question to your Problem\" }";
-            byte[] responseContent = Encoding.UTF8.GetBytes(json);
-            wr.ContentLength = responseContent.Length;
-            Stream dataStream = wr.GetRequestStream();
-            dataStream.Write(responseContent, 0, responseContent.Length);
-            dataStream.Close();
-            WebResponse response = wr.GetResponse();
-            Console.WriteLine(response.ToString());
+            stream.Write(response.Content, 0, response.Content.Length);
         }
-        public void TranslationResponse(string path, string content)
+   
+        private static void Write(Stream stream, string text)
         {
-            if (path.Equals("/create"))
-                ResponseCreate(content);
-            else if (path.Equals("/asigneeComment"))
-                ResponseAsigneeComment(content);
+            byte[] bytes = Encoding.UTF8.GetBytes(text);
+            stream.Write(bytes, 0, bytes.Length);
         }
     }
 }

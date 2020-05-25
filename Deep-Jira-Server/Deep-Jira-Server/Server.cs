@@ -29,7 +29,7 @@ namespace Deep_Jira_Server
                     Console.WriteLine("Waiting for a connection...");
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
-                    Thread t = new Thread(new ParameterizedThreadStart(HandleDeivce));
+                    Thread t = new Thread(new ParameterizedThreadStart(HandleClient));
                     t.Start(client);
                 }
             }
@@ -40,7 +40,7 @@ namespace Deep_Jira_Server
             }
         }
 
-        public void HandleDeivce(object obj)
+        public void HandleClient(object obj)
         {
             TcpClient client = (TcpClient)obj;
 
@@ -49,9 +49,10 @@ namespace Deep_Jira_Server
                 Stream stream = client.GetStream();
                 HttpProcessor httpProcessor = new HttpProcessor();
                 HttpRequest request = httpProcessor.GetRequest(stream);
-                httpProcessor.TranslationResponse(request.Url,request.Content);
+                httpProcessor.SendResponse(stream);
+                JiraConnector jiraConnector = new JiraConnector();
+                jiraConnector.GetWebhook(request.Url, request.Content);
                 client.Close();
-               
             }
             catch (Exception e)
             {
