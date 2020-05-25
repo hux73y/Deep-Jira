@@ -81,7 +81,8 @@ namespace Deep_Jira_Server
         }
         private void ResponseDeleteTicket(string issueKey)
         {
-
+            TicketHandler tc = new TicketHandler();
+            tc.deleteTicket(issueKey);
         }
         
         public void GetWebhook(string path, string content)

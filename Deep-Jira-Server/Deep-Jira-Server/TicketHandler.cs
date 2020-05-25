@@ -71,7 +71,8 @@ namespace Deep_Jira_Server
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    if (line != "removeme")
+                    string[] pairs = line.Split(" ", 2);
+                    if (pairs[0] != issueKey)
                         sw.WriteLine(line);
                 }
             }

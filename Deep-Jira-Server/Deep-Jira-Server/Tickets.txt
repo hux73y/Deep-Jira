@@ -1,3 +1,2 @@
-﻿key DE
 key DE
-AS-69 DE
+key DE
