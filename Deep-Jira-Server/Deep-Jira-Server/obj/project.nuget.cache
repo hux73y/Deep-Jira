@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "JOAcum4R5ZQdM8X35NB/93yKnLCfcUkvY95La9Dxjj80X/WkgmpUr23G8uLkdYErB2ZzVjBogW7dV39hzkB7KQ==",
+  "dgSpecHash": "2IblUqOFzq3OA9+qULSMuIr6JHMeRzgG7RfiWDpDg3azLDrtodnrF9tshpDIgGCGR80VNFPuzqwht2V68TghjA==",
   "success": true,
   "projectFilePath": "C:\\Users\\bashx\\source\\repos\\Deep-Jira\\Deep-Jira-Server\\Deep-Jira-Server\\Deep-Jira-Server.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\bashx\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\bashx\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\bashx\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
   ],
   "logs": []
 }

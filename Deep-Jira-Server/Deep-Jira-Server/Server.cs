@@ -11,11 +11,14 @@ namespace Deep_Jira_Server
     class Server
     {
         TcpListener server = null;
+        string jiraLogin;
+        string deeplLogin;
 
         public Server(string ip, int port)
         {
             IPAddress localAddr = IPAddress.Parse(ip);
             server = new TcpListener(localAddr, port);
+            setLoginData();
             server.Start();
             StartListener();
         }
@@ -50,7 +53,7 @@ namespace Deep_Jira_Server
                 HttpProcessor httpProcessor = new HttpProcessor();
                 HttpRequest request = httpProcessor.GetRequest(stream);
                 httpProcessor.SendResponse(stream);
-                JiraConnector jiraConnector = new JiraConnector();
+                JiraConnector jiraConnector = new JiraConnector(jiraLogin, deeplLogin);
                 jiraConnector.GetWebhook(request.Url, request.Content);
                 client.Close();
             }
@@ -59,6 +62,13 @@ namespace Deep_Jira_Server
                 Console.WriteLine("Exception: {0}", e.ToString());
                 client.Close();
             }
+        }
+
+        private void setLoginData()
+        {
+            string[] loginData = System.IO.File.ReadAllLines(@"C:\Users\bashx\Desktop\Login.txt");
+            jiraLogin = loginData[0];
+            deeplLogin = loginData[1];
         }
     }
 }

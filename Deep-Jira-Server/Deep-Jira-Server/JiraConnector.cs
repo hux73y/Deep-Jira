@@ -13,9 +13,12 @@ namespace Deep_Jira_Server
         private string jiraUrl = "https://team-percy.atlassian.net/rest/api/2/issue/";
 
         private DeeplConnector dc;
-        public JiraConnector()
+        private string jLogin;
+
+        public JiraConnector(string jiraLogin, string deeplLogin)
         {
-            dc = new DeeplConnector();
+            jLogin = jiraLogin;
+            dc = new DeeplConnector(deeplLogin);
         }
         private WebRequest CreateRequest(string url)
         {
@@ -89,11 +92,11 @@ namespace Deep_Jira_Server
         {
             dynamic jsonObject = JsonConvert.DeserializeObject(content);
 
-            if (path.Equals("/create"))
+            if (path.Equals("/translateTicket"))
                 CreateRequest((string)jsonObject.issue.key, (string)jsonObject.issue.fields.summary, (string)jsonObject.issue.fields.description);
-            else if (path.Equals("/asigneeComment"))
+            else if (path.Equals("/translateAsigneeComment"))
                 ResponseAsigneeComment((string)jsonObject.issue.key, (string)jsonObject.comment.id, (string)jsonObject.comment.body);
-            else if (path.Equals("/customerComment"))
+            else if (path.Equals("/translateCustomerComment"))
                 ResponseCustomerComment((string)jsonObject.issue.key, (string)jsonObject.comment.id, (string)jsonObject.comment.body);
             else if (path.Equals("/deleteTicket"))
                 ResponseDeleteTicket((string)jsonObject.issue.key);

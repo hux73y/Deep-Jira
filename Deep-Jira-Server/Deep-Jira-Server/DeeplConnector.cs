@@ -9,10 +9,11 @@ namespace Deep_Jira_Server
 {
     class DeeplConnector
     {
+        private string dLogin;
         
-        public DeeplConnector()
+        public DeeplConnector(string deeplLogin)
         {
-
+            dLogin = deeplLogin;
         }
        
         public Translation Translate(string targetLanguage, string text)
