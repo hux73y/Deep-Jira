@@ -14,8 +14,6 @@ namespace Deep_Jira_Server
             t.Start();
 
             Console.WriteLine("Server Started");
-            //HttpProcessor processor = new HttpProcessor();
-            //processor.Response("test");
         }
     }
 }

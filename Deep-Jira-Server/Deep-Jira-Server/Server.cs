@@ -11,11 +11,14 @@ namespace Deep_Jira_Server
     class Server
     {
         TcpListener server = null;
+        string jiraLogin;
+        string deeplLogin;
 
         public Server(string ip, int port)
         {
             IPAddress localAddr = IPAddress.Parse(ip);
             server = new TcpListener(localAddr, port);
+            setLoginData();
             server.Start();
             StartListener();
         }
@@ -29,7 +32,7 @@ namespace Deep_Jira_Server
                     Console.WriteLine("Waiting for a connection...");
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
-                    Thread t = new Thread(new ParameterizedThreadStart(HandleDeivce));
+                    Thread t = new Thread(new ParameterizedThreadStart(HandleClient));
                     t.Start(client);
                 }
             }
@@ -40,7 +43,7 @@ namespace Deep_Jira_Server
             }
         }
 
-        public void HandleDeivce(object obj)
+        public void HandleClient(object obj)
         {
             TcpClient client = (TcpClient)obj;
 
@@ -49,15 +52,23 @@ namespace Deep_Jira_Server
                 Stream stream = client.GetStream();
                 HttpProcessor httpProcessor = new HttpProcessor();
                 HttpRequest request = httpProcessor.GetRequest(stream);
-                httpProcessor.TranslationResponse(request.Url,request.Content);
+                httpProcessor.SendResponse(stream);
+                JiraConnector jiraConnector = new JiraConnector(jiraLogin, deeplLogin);
+                jiraConnector.GetWebhook(request.Url, request.Content);
                 client.Close();
-               
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception: {0}", e.ToString());
                 client.Close();
             }
+        }
+
+        private void setLoginData()
+        {
+            string[] loginData = System.IO.File.ReadAllLines(@"C:\Users\bashx\Desktop\Login.txt");
+            jiraLogin = loginData[0];
+            deeplLogin = loginData[1];
         }
     }
 }
