@@ -2,3 +2,5 @@ key DE
 key DE
 AS-70 DE
 AS-71 DE
+AS-77 DE
+AS-78 EN
