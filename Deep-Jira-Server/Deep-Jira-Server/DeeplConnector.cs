@@ -23,7 +23,7 @@ namespace Deep_Jira_Server
            
             wr.ContentType = "application/x-www-form-urlencoded";
             wr.Method = "POST";
-            string content = "auth_key=7a789262-601c-678c-bae3-49af96a92acb&text=" + text + "&target_lang=" + targetLanguage;
+            string content = "auth_key=" + dLogin + "&text=" + text + "&target_lang=" + targetLanguage;
             return WriteContent(content, wr);
 
         }

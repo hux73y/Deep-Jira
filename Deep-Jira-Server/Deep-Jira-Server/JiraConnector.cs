@@ -23,7 +23,7 @@ namespace Deep_Jira_Server
         private WebRequest CreateRequest(string url)
         {
             WebRequest wr = WebRequest.Create(url);
-            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("percy.wuensch@gmx.de:g7LKzdmjXetO76N8AZcb8982"));
+            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(jLogin));
             wr.Headers.Add("Authorization", "Basic " + encoded);
             wr.ContentType = "application/json";
             wr.Method = "PUT";
