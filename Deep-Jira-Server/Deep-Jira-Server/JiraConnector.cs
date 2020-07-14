@@ -23,7 +23,7 @@ namespace Deep_Jira_Server
         private WebRequest CreateRequest(string url)
         {
             WebRequest wr = WebRequest.Create(url);
-            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("percy.wuensch@gmx.de:g7LKzdmjXetO76N8AZcb8982"));
+            string encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(jLogin));
             wr.Headers.Add("Authorization", "Basic " + encoded);
             wr.ContentType = "application/json";
             wr.Method = "PUT";
@@ -44,8 +44,8 @@ namespace Deep_Jira_Server
         {
 
             //Get tranlation from deepl here and store info
-            Translation translationSummary = dc.Translate("EN",summary);
-            Translation translationDescription = dc.Translate("EN", description);
+            Translation translationSummary = dc.Translate("DE",summary);
+            Translation translationDescription = dc.Translate("DE", description);
             TicketHandler th = new TicketHandler();
             th.writeTicket(issueKey,translationDescription.SourceLanguage);
             
@@ -77,7 +77,7 @@ namespace Deep_Jira_Server
             WebRequest wr = CreateRequest(url);
 
             //get Deepl translation here
-            Translation commentTranslation = dc.Translate("EN", comment);
+            Translation commentTranslation = dc.Translate("DE", comment);
             string json = "{\"body\": \"" + commentTranslation.Text + "\" }";
             
             WriteContent(json, wr);
